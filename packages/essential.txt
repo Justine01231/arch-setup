@@ -1,0 +1,14 @@
+kitty
+git
+curl
+wget
+vim
+neovim
+base-devel
+fontconfig
+fastfetch
+ttf-jetbrains-mono-nerd
+ttf-firacode-nerd
+ttf-cascadia-code-nerd
+ttf-hack-nerd
+ttf-sourcecodepro-nerd

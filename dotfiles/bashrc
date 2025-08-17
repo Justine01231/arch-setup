@@ -1,0 +1,307 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# =====================================================
+# ENVIRONMENT VARIABLES
+# =====================================================
+export EDITOR=nvim
+export VISUAL=nvim
+export BROWSER=firefox
+export TERMINAL=kitty
+export PATH=$PATH:$(go env GOPATH)/bin
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+export HISTCONTROL=ignoredups:erasedups
+
+# =====================================================
+# BASH OPTIONS
+# =====================================================
+shopt -s autocd         # Change to a directory just by typing its name
+shopt -s cdspell        # Autocorrect typos in path names when using `cd`
+shopt -s cmdhist        # Save multi-line commands in history as single line
+shopt -s histappend     # Append to history, don't overwrite it
+
+# =====================================================
+# BASIC ALIASES
+# =====================================================
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ~='cd ~'
+alias c='clear'
+alias h='history'
+alias j='jobs -l'
+alias tree='tree -C'
+
+# =====================================================
+# PACKAGE MANAGEMENT ALIASES (FUNNY ONES 😂)
+# =====================================================
+
+# Pacman aliases (normal ones)
+alias pac='sudo pacman'
+alias pacs='pacman -Ss'          # search
+alias paci='sudo pacman -S'      # install
+alias pacr='sudo pacman -R'      # remove
+alias pacu='sudo pacman -Syu'    # update
+alias pacq='pacman -Q'           # query installed
+alias pacqi='pacman -Qi'         # detailed info
+
+# The FUNNY pacman aliases 🤣
+alias gimme='sudo pacman -S'
+alias fucking='sudo pacman -S'
+alias damn='sudo pacman -S'
+alias shit='sudo pacman -S'
+alias wtf='pacman -Ss'           # search when you don't know the package name
+alias fml='sudo pacman -Syu'     # when update breaks something
+alias nuke='sudo pacman -Rns'    # nuclear option remove
+alias oops='sudo pacman -U /var/cache/pacman/pkg/' # when you need to downgrade
+alias please='sudo pacman -S'
+alias gimme='sudo pacman -S'
+alias install='sudo pacman -S'
+
+# AUR aliases (yay)
+alias yeet='yay -S'              # install from AUR
+alias yolo='yay -Sua'            # update AUR packages
+alias aur='yay -Ss'              # search AUR
+alias yay-clean='yay -Yc'        # clean build cache
+
+# System maintenance (funny names)
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq) 2>/dev/null || echo "Nothing to clean"'
+alias orphans='pacman -Qtdq'
+alias fixme='sudo pacman -Syyu'  # when things are broken
+alias godmode='sudo -i'          # become root
+alias whatami='uname -a && cat /etc/os-release'
+
+# =====================================================
+# DEVELOPMENT ALIASES
+# =====================================================
+alias py='python'
+alias py3='python3'
+alias pip='python -m pip'
+alias venv='python -m venv'
+alias serve='python -m http.server'
+alias json='python -m json.tool'
+
+# Git aliases
+alias g='git'
+alias ga='git add'
+alias gaa='git add .'
+alias gc='git commit -m'
+alias gp='git push'
+alias gl='git pull'
+alias gs='git status'
+alias gd='git diff'
+alias gb='git branch'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gm='git merge'
+alias gr='git remote -v'
+alias glog='git log --oneline --graph --decorate --all'
+
+# Docker aliases
+alias d='docker'
+alias dc='docker-compose'
+alias dps='docker ps'
+alias di='docker images'
+alias drm='docker rm'
+alias drmi='docker rmi'
+alias dstop='docker stop $(docker ps -q)'
+alias dclean='docker system prune -af'
+
+# =====================================================
+# SYSTEM INFORMATION ALIASES
+# =====================================================
+alias meminfo='free -h'
+alias diskinfo='df -h'
+alias cpuinfo='lscpu'
+alias gpuinfo='lspci | grep VGA'
+alias ports='netstat -tulanp'
+alias listening='netstat -tulanp | grep LISTEN'
+alias temp='sensors'
+alias myip='curl -s ifconfig.me && echo'
+alias localip='ip addr show | grep inet'
+alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
+
+# =====================================================
+# FILE OPERATIONS
+# =====================================================
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -Iv'
+alias mkdir='mkdir -pv'
+alias chmod='chmod --preserve-root'
+alias chown='chown --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+# Archive extraction
+extract() {
+    if [ -f "$1" ] ; then
+        case $1 in
+            *.tar.bz2)   tar xjf "$1"     ;;
+            *.tar.gz)    tar xzf "$1"     ;;
+            *.bz2)       bunzip2 "$1"     ;;
+            *.rar)       unrar x "$1"     ;;
+            *.gz)        gunzip "$1"      ;;
+            *.tar)       tar xf "$1"      ;;
+            *.tbz2)      tar xjf "$1"     ;;
+            *.tgz)       tar xzf "$1"     ;;
+            *.zip)       unzip "$1"       ;;
+            *.Z)         uncompress "$1"  ;;
+            *.7z)        7z x "$1"        ;;
+            *)           echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# =====================================================
+# PRODUCTIVITY ALIASES
+# =====================================================
+alias weather='curl wttr.in'
+alias moon='curl wttr.in/moon'
+alias news='curl getnews.tech'
+alias crypto='curl rate.sx'
+alias qr='qrencode -t utf8'
+alias timer='termdown'
+alias calendar='cal -3'
+alias week='date +%V'
+
+# Directory bookmarks
+alias docs='cd ~/Documents'
+alias dl='cd ~/Downloads'
+alias pics='cd ~/Pictures'
+alias music='cd ~/Music'
+alias videos='cd ~/Videos'
+alias projects='cd ~/Projects'
+alias config='cd ~/.config'
+
+# =====================================================
+# FUNNY/JOKE ALIASES 🎭
+# =====================================================
+alias please='sudo'
+alias fucking='sudo'
+alias seriously='sudo'
+alias wtf='dmesg | tail'
+alias onoz='cat /var/log/errors.log'
+alias rtfm='man'
+alias visible='ls -la'
+alias invisible='ls -d .* 2>/dev/null'
+alias busy="cat /dev/urandom | hexdump -C | grep 'ca fe'"
+alias matrix='cmatrix'
+alias starwars='telnet towel.blinkenlights.nl'
+alias rickroll='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+
+# Trolling aliases (be careful with these! 😈)
+alias windows='echo "Error 404: Windows not found. This is Arch Linux, btw."'
+alias macos='echo "Think different? Think Arch Linux instead!"'
+alias ubuntu='echo "I use Arch btw 😎"'
+alias mint='echo "Why settle for mint when you can have Arch?"'
+
+# =====================================================
+# ARCH LINUX SPECIFIC
+# =====================================================
+alias mirrors='sudo reflector --verbose --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
+alias pacdiff='sudo pacdiff'
+alias orphaned='sudo pacman -Rns $(pacman -Qtdq)'
+alias arch-news='curl -s https://archlinux.org/news/ | grep -E "<title>|<pubDate>" | sed "s/<[^>]*>//g"'
+
+# =====================================================
+# CUSTOM FUNCTIONS
+# =====================================================
+
+# Create and enter directory
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Search and install package
+search-install() {
+    pacman -Ss "$1"
+    read -p "Install which package? " package
+    sudo pacman -S "$package"
+}
+
+# Quick backup
+backup() {
+    cp "$1" "$1.backup.$(date +%Y%m%d_%H%M%S)"
+    echo "Backed up $1"
+}
+
+# System information function
+sysinfo() {
+    echo -e "\033[1;32m===== SYSTEM INFORMATION =====\033[0m"
+    echo -e "\033[1;33mHostname:\033[0m $(hostname)"
+    echo -e "\033[1;33mUptime:\033[0m $(uptime -p)"
+    echo -e "\033[1;33mKernel:\033[0m $(uname -r)"
+    echo -e "\033[1;33mCPU:\033[0m $(lscpu | grep 'Model name' | cut -d: -f2 | xargs)"
+    echo -e "\033[1;33mMemory:\033[0m $(free -h | grep Mem | awk '{print $3"/"$2}')"
+    echo -e "\033[1;33mDisk:\033[0m $(df -h / | tail -1 | awk '{print $3"/"$2 " ("$5" used)"}')"
+    echo -e "\033[1;33mPackages:\033[0m $(pacman -Q | wc -l) installed"
+}
+
+# =====================================================
+# PROMPT CUSTOMIZATION
+# =====================================================
+
+# Enhanced prompt with git branch and colors
+git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+# Colorful prompt
+PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[01;33m\]$(git_branch)\[\033[00m\]\$ '
+
+# Alternative minimal prompt (uncomment to use)
+# PS1='[\u@\h \W]\$ '
+
+# =====================================================
+# LOAD CUSTOM SCRIPTS
+# =====================================================
+
+# Source focusX (if exists)
+if [ -f ~/focusX/focusX.sh ]; then
+    source ~/focusX/focusX.sh
+fi
+
+# Source local customizations (if exists)
+if [ -f ~/.bashrc.local ]; then
+    source ~/.bashrc.local
+fi
+
+# =====================================================
+# WELCOME MESSAGE (COMMENTED OUT)
+# =====================================================
+# Uncomment the lines below if you want a welcome message on terminal startup
+
+# echo -e "\033[1;35m"
+# echo "Welcome to Arch Linux! 🏹"
+# echo "Type 'fucking firefox' to install Firefox 😂"
+# echo "Type 'sysinfo' for system information"
+# echo "Type 'wtf package_name' to search for packages"
+# echo -e "\033[0m"
+
+# Display a random tip on startup (optional - uncomment to enable)
+# tips=(
+#     "💡 Tip: Use 'fucking install package_name' instead of 'sudo pacman -S package_name'"
+#     "💡 Tip: 'yeet package_name' installs from AUR"
+#     "💡 Tip: 'nuke package_name' removes package with all dependencies"
+#     "💡 Tip: Use 'cleanup' to remove orphaned packages"
+#     "💡 Tip: 'fixme' force refreshes package databases"
+# )
+# echo -e "\033[1;36m${tips[$RANDOM % ${#tips[@]}]}\033[0m"
+
+# =====================================================
+# END OF BASHRC
+# =====================================================
