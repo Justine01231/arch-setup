@@ -229,10 +229,6 @@ chmod 644 ~/.config/kitty/kitty.conf
 
 Feel free to fork this repository and customize it for your needs!
 
-## 📄 License
-
-MIT License - feel free to use and modify as needed.
-
 ---
 
 **Last updated**: $(date +'%Y-%m-%d')
