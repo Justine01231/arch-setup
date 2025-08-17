@@ -6,7 +6,7 @@ A complete guide to quickly restore my Arch Linux environment after a fresh inst
 
 ```bash
 # Clone this repository
-git clone https://github.com/yourusername/arch-setup.git
+git clone https://github.com/Justine01231/arch-setup.git
 cd arch-setup
 
 # Make setup script executable
